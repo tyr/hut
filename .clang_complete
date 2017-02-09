@@ -1,0 +1,3 @@
+-Isrc/include
+-Ilib/googletest/googletest/include
+--std=gnu11
