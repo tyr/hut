@@ -8,6 +8,8 @@ set(${PROJECT_NAME}_DB_OBJECTS
 
     db/hut_db.c
 
+    db/hut_version.c
+
 )
 
 # CLI

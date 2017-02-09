@@ -17,4 +17,23 @@
  * License along with this library.
  */
 
-#include "hut_atomic.h"
+#include "hut/version.h"
+
+/******************************************************************************
+ * VERSION ACCESSORS
+ */
+
+static const hut_abi_version_t _hut_abi_version = HUT_ABI_VERSION;
+static const hut_package_version_t _hut_package_version = HUT_PACKAGE_VERSION;
+
+/******************************************************************************
+ * VERSION ACCESSORS
+ */
+
+const hut_package_version_t * hut_get_package_version(void) {
+  return &_hut_package_version;
+}
+
+const hut_abi_version_t * hut_get_abi_version(void) {
+  return &_hut_abi_version;
+}
