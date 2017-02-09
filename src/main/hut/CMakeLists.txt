@@ -50,6 +50,7 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fPIC")
 add_library(${PROJECT_NAME}_static STATIC ${${PROJECT_NAME}_DB_OBJECTS})
 set_target_properties(${PROJECT_NAME}_static PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME}_static tinycthread)
+target_link_libraries(${PROJECT_NAME}_static xxhash)
 #target_link_libraries(${PROJECT_NAME}_static ${Tcmalloc_LIBRARIES})
 
 # Shared library
@@ -58,6 +59,7 @@ if(BUILD_SHARED)
   add_library(${PROJECT_NAME}_shared SHARED ${${PROJECT_NAME}_DB_OBJECTS})
   set_target_properties(${PROJECT_NAME}_shared PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
   target_link_libraries(${PROJECT_NAME}_shared tinycthread)
+  target_link_libraries(${PROJECT_NAME}_shared xxhash)
 #  target_link_libraries(${PROJECT_NAME}_static ${Tcmalloc_LIBRARIES})
 endif(BUILD_SHARED)
 

@@ -1,12 +1,12 @@
 #
-# General definitions.
+# General definitions
 #
 
 cmake_minimum_required (VERSION 2.8)
 project (hut)
 
 #
-# Set CMake policies.
+# Set CMake policies
 #
 
 if(POLICY CMP0037)
@@ -18,7 +18,7 @@ if(POLICY CMP0042)
 endif()
 
 #
-# Set directories and paths.
+# Set directories and paths
 #
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
@@ -33,7 +33,7 @@ set(PROJECT_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 #
-# Check proper build type.
+# Check proper build type
 #
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -44,7 +44,7 @@ endif(NOT CMAKE_BUILD_TYPE)
 message("-- Current build type is : ${CMAKE_BUILD_TYPE}")
 
 #
-# Set C11 compile flags.
+# Set C11 compile flags
 #
 
 include(CheckCCompilerFlag)
@@ -56,7 +56,7 @@ else()
 endif()
 
 #
-# Set C++11 compile flags.
+# Set C++11 compile flags
 #
 
 #include(CheckCXXCompilerFlag)
@@ -71,7 +71,7 @@ endif()
 #endif()
 
 #
-# Set compiler flags.
+# Set compiler flags
 #
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fPIC -D_FILE_OFFSET_BITS=64")
@@ -79,7 +79,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_REENTRANT -D_GNU_SOURCE")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-strict-aliasing")
 
 #
-# Set code coverage.
+# Set code coverage
 #
 
 if(CMAKE_BUILD_TYPE MATCHES Coverage)
@@ -96,20 +96,20 @@ if(CMAKE_BUILD_TYPE MATCHES Coverage)
 endif(CMAKE_BUILD_TYPE MATCHES Coverage)
 
 #
-# Set additional linker flags.
+# Set additional linker flags
 #
 
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -flto")
 
 #
-# Set include directories.
+# Set include directories
 #
 
 include_directories("${PROJECT_SOURCE_DIR}")
 include_directories("${PROJECT_INCLUDE_DIR}")
 
 #
-# Handle tinycthread.
+# Handle tinycthread
 #
 
 include_directories("${PROJECT_LIB_DIR}/tinycthread/source/")
@@ -117,7 +117,14 @@ add_library(tinycthread STATIC "${PROJECT_LIB_DIR}/tinycthread/source/tinycthrea
 link_libraries(tinycthread ${CMAKE_THREAD_LIBS_INIT})
 
 #
-# Handle testing.
+# Handle xxhash
+#
+
+include_directories("${PROJECT_LIB_DIR}/xxhash/")
+add_library(xxhash STATIC "${PROJECT_LIB_DIR}/xxhash/xxhash.c")
+
+#
+# Handle testing
 #
 
 option(BUILD_TESTS "Whether or not to build the tests" ON)
@@ -134,7 +141,7 @@ else(BUILD_TESTS)
 endif(BUILD_TESTS)
 
 #
-# Include subdirectory.
+# Include subdirectory
 #
 
 add_subdirectory(src)
